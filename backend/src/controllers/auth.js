@@ -68,7 +68,7 @@ export const authController = new (class AuthController {
           username: username,
           mobile: mobile,
           email: email,
-          image: `http://localhost:7000/${data.img}`,
+          image: `http://${process.env.HOSTNAMESERVER}:${process.env.PORTSR}/${data.img}`,
           password: password,
           roleuser: req.body.role ? req.body.role : null,
           role: [{}],

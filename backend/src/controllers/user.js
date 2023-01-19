@@ -1,6 +1,7 @@
 import { validationResult } from "express-validator";
 
-
+import * as dotenv from "dotenv";
+dotenv.config();
 import db from "../model/index.js";
 import { Op } from "sequelize";
 import sequelize from "sequelize";
@@ -59,7 +60,7 @@ export const updateUser = async function (req, res) {
   const data = {};
   if (req.file !== undefined && req.file !== null) {
     data.image = req.file.path.replace(/\\/g, "/").substring(6);
-    req.body.image = `http://localhost:7000/${data.image}`;
+    req.body.image = `http://${process.env.HOSTNAMESERVER}:${process.env.PORTSR}/${data.image}`;
   } else {
     req.body.image = user.image;
   }
@@ -197,7 +198,7 @@ export const createUser = async function (req, res) {
   const data = {};
   if (req.file !== undefined && req.file !== null) {
     data.image = req.file.path.replace(/\\/g, "/").substring(6);
-    req.body.image = `http://127.0.0.1:7000${data.image}`;
+    req.body.image = `http://${process.env.HOSTNAMESERVER}:${process.env.PORTSR}${data.image}`;
   } else {
     req.body.image = null;
   }

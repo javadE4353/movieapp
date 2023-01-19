@@ -1,7 +1,7 @@
 {
     "development": {
-        "username": "root",
-        "password": "4353",
+        "username": "javad43",
+        "password": "43534353",
         "database": "movieApp",
         "host": "127.0.0.1",
         "dialect": "mysql",
@@ -13,8 +13,8 @@
         }
       },
       "test": {
-        "username": "root",
-        "password": "4353",
+        "username": "javad43",
+        "password": "43534353",
         "database": "movieApp_test",
         "host": "127.0.0.1",
         "dialect": "mysql",
@@ -26,8 +26,8 @@
         }
       },
       "production": {
-        "username": "root",
-        "password": "4353",
+        "username": "javad43",
+        "password": "43534353",
         "database": "movieApp_production",
         "host": "127.0.0.1",
         "dialect": "mysql",

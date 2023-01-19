@@ -33,10 +33,10 @@ logError();
 app.use("/api/v1/", router);
 // listen server
 const PORT =
-  process.env.NODE_ENV === "production" ? process.env.PORTSR || 80 : 7000;
+  process.env.NODE_ENV === "production" ? process.env.PORTSR || 80 : 3500;
 const HOSTNAME =
   process.env.NODE_ENV === "production"
-    ? process.env.HOSTNAMESERVER || "193.186.32.204": "127.0.0.1";
+    ? process.env.HOSTNAMESERVER || "localhost": "localhost";
 app.listen(PORT, HOSTNAME, () => {
   console.log(chalk.bgYellow(app.get("env")));
   console.log(chalk.bgGreen(`connected server${HOSTNAME}:${PORT}`));

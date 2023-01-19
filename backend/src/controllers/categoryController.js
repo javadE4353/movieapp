@@ -1,5 +1,6 @@
 import { validationResult } from "express-validator";
-
+import * as dotenv from "dotenv";
+dotenv.config();
 
 import db from "../model/index.js";
 import { responce } from "../util/configResponce.js";
@@ -61,7 +62,7 @@ export const categoryController = new (class CategoryController {
     const dataimg = {};
     if (req.file !== undefined && req.file !== null) {
       dataimg.image = req.file.path.replace(/\\/g, "/").substring(6);
-      req.body.image = `http://localhost:7000/${dataimg.image}`;
+      req.body.image = `http://${process.env.HOSTNAMESERVER}:${process.env.PORTSR}/${dataimg.image}`;
     } else {
       req.body.image = null;
     }
@@ -391,7 +392,7 @@ export const categoryController = new (class CategoryController {
     const dataimg = {};
     if (req.file !== undefined && req.file !== null) {
       dataimg.backdrop_path = req.file.path.replace(/\\/g, "/").substring(6);
-      req.body.image = `http://localhost:7000/${dataimg.backdrop_path}`;
+      req.body.image = `http://${process.env.HOSTNAMESERVER}:${process.env.PORTSR}/${dataimg.backdrop_path}`;
     } else {
       req.body.image = null;
     }

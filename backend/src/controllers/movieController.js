@@ -4,7 +4,8 @@ import { responce } from "../util/configResponce.js";
 import { paginate } from "../helper/paginate.js";
 import sequelize from "sequelize";
 import { Op } from "sequelize";
-
+import * as dotenv from "dotenv";
+dotenv.config();
 export const movieController = new (class MovieController {
   constructor() {}
 
@@ -23,7 +24,7 @@ export const movieController = new (class MovieController {
     const dataimg = {};
     if (req.file !== undefined && req.file !== null) {
       dataimg.poster_path = req.file.path.replace(/\\/g, "/").substring(6);
-      req.body.poster_path = `http://localhost:7000/${dataimg.poster_path}`;
+      req.body.poster_path = `http://${process.env.HOSTNAMESERVER}:${process.env.PORTSR}/${dataimg.poster_path}`;
     } else {
       req.body.poster_path = null;
     }
@@ -189,7 +190,7 @@ export const movieController = new (class MovieController {
         const dataimg = {};
         if (req.file !== undefined && req.file !== null) {
           dataimg.poster_path = req.file.path.replace(/\\/g, "/").substring(6);
-          req.body.poster_path = `http://localhost:7000/${dataimg.poster_path}`;
+          req.body.poster_path = `http://${process.env.HOSTNAMESERVER}:${process.env.PORTSR}/${dataimg.poster_path}`;
         } else {
           req.body.poster_path = movie.toJSON().poster_path;
         }
@@ -241,7 +242,7 @@ export const movieController = new (class MovieController {
       const dataimg = {};
       if (req.file !== undefined && req.file !== null) {
         dataimg.poster_path = req.file.path.replace(/\\/g, "/").substring(6);
-        req.body.poster_path = `http://localhost:7000/${dataimg.poster_path}`;
+        req.body.poster_path = `http://${process.env.HOSTNAMESERVER}:${process.env.PORTSR}/${dataimg.poster_path}`;
       } else {
         req.body.poster_path = movie.toJSON().poster_path;
       }
