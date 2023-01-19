@@ -12,6 +12,7 @@ import {
   getCountUsersByRole,
 } from "../../controllers/user.js";
 import verifyRoles from "../../middleware/verifyRole.js";
+import { validatoreUser } from "./validate.js";
 
 const userRouter = express.Router();
 
@@ -29,6 +30,7 @@ userRouter.put(
     }
     next();
   },
+  validatoreUser.editeuser(),
   updateUser
 );
 
@@ -44,6 +46,7 @@ userRouter.post(
     }
     next();
   },
+  validatoreUser.createuser(),
   createUser
 );
 // //DELETE

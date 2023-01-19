@@ -136,9 +136,11 @@ const handleRefreshToken = async (req, res) => {
           sameSite: "Lax",
           maxAge: 24 * 60 * 60 * 1000,
         });
+        const user=await db.user.findOne({where:{id:decoded.id}})
         const userInfo = {
           role: newRole.toJSON().name,
           username: decoded.username,
+          image:user.toJSON()?.image,
           id: decoded.id,
         };
         responce({

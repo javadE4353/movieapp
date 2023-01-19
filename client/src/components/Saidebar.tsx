@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 
 //module external
-import { Dispatch } from "redux";
 import { HiMenuAlt3 } from "react-icons/hi";
 import { BsX,BsDoorClosed } from "react-icons/bs";
 import { motion } from "framer-motion";
@@ -12,12 +11,11 @@ import {
 
 //
 import { useAppSelector,useAppDispatch } from "../app/hooks";
-import { axiospublic } from "../axios/configApi";
-import { actionLogout } from "../redux/actionCreator/actionCreateAuth";
 import { StateTypeAuth } from "../typeing";
 import { menuAdmin, Menus, menuUser } from "../data/dataSaidebarHome";
 import { closesidebar } from "../features/sidebar/sidebar";
 import { logout } from "../features/auth/auth";
+import useAxiosPrivate from "../hook/useAxiosPrivate";
 
 
 interface Props{
@@ -29,19 +27,20 @@ const Sidebar = ({role}:Props) => {
   const user = useAppSelector((state: StateTypeAuth) => state?.auth);
   const dispatch= useAppDispatch();
   const navigate = useNavigate();
+  const axiosPrivate=useAxiosPrivate()
 
   const [open, setOpen] = useState(true);
   const hanlerLogout = async () => {
     try {
-      await axiospublic.get("/auth/logout");
-      dispatch(logout())
+      await axiosPrivate.get("/auth/logout");
+      dispatch(logout());
       navigate("/");
     } catch (error) {}
   };
 
   useEffect(() => {
     role === "admin" ? setMenus(menuAdmin) : setMenus(menuUser);
-  }, []);
+  }, [role]);
   //return
   return (
     <motion.div

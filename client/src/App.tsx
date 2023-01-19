@@ -7,19 +7,15 @@ import ConfigPages from "./configPages/ConfigPages";
 import { fatchCategorysPublic } from "./features/categorys/category";
 import { fatchRefreshToken } from "./features/auth/auth";
 import { fatchmoviesPublic } from "./features/movies/movies";
-import Header from "./components/Header";
-import NavigationBottom from "./subcomponents/NavigationBottom";
 
 //APP
 const App: React.FC = () => {
   const dispatch = useAppDispatch();
-  const location=useLocation()
   useEffect(() => {
     dispatch(fatchmoviesPublic());
     dispatch(fatchCategorysPublic());
     dispatch(fatchRefreshToken());
   }, []);
-console.log(location.pathname)
   return (
     <div className="relative container mx-auto">
       <ConfigPages />

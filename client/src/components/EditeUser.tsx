@@ -45,13 +45,14 @@ interface State {
 }
 
 interface Inputs {
-  email: string;
-  username: string;
-  mobile: string;
-  password: string;
-  roleuser: string;
-  profile: string;
-  image: string;
+  email: string
+  username: string
+  mobile: string
+  password: string
+  roleuser: string
+  profile: string
+  image: string
+  confirm:string
 }
 
 interface Props{
@@ -98,6 +99,11 @@ const EditUser = ({path}:Props) => {
       );
       if(data.password == "") formData.delete("password");
       formData.append(
+        "confirm",
+        data.confirm 
+      );
+      if(data.confirm == "") formData.delete("confirm");
+      formData.append(
         "mobile",
         data.mobile 
       );
@@ -116,7 +122,7 @@ const EditUser = ({path}:Props) => {
         "roleuser",
         data.roleuser
       );
-      if(data.roleuser == "") formData.delete("roleuser");
+      if(!data.roleuser || data.roleuser == "") formData.delete("roleuser");
       if (id !== null && user ) {
         dispatch(fatchUpdateUsers({axiosPrivate, data:formData,id: Number(id)}));
       }
@@ -140,6 +146,7 @@ const EditUser = ({path}:Props) => {
   useEffect(() => {
     handleupdate();
   }, [stateUsers?.update]);
+  console.log(user)
   return (
     <>
       <MuiModal
@@ -266,6 +273,20 @@ const EditUser = ({path}:Props) => {
                         placeholder="435343@$%J"
                         {...register("password", {
                           pattern: /(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-zA-Z])/,
+                        })}
+                      />
+                    </div>
+                    <div>
+                      <label
+                        form=""
+                        className="block mb-2 text-sm font-medium text-white dark:text-white"
+                      >
+                       تایید رمز ورود
+                      </label>
+                      <input
+                        type="text"
+                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                        {...register("confirm", {
                         })}
                       />
                     </div>

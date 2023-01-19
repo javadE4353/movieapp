@@ -42,22 +42,24 @@ export interface Movies {
 }
 //
 export interface Userinfo {
-  role: string;
-  id: number;
-  username: string;
-  accessToken: string;
+  role: string
+  id: number
+  username: string
+  accessToken: string
+  image?:string
 }
 
 //
 export interface CommentType {
-  movieid: number;
-  userId: number;
-  username: string;
-  movietitle: string;
-  content: string;
-  updatedAt?: string;
-  ratings: number;
-  createdAt?: string;
+  movieid: number
+  userId: number
+  username: string
+  movietitle: string
+  content: string
+  updatedAt?: string
+  ratings: number
+  createdAt?: string
+  image?:string
 }
 //
 export interface Ratings {

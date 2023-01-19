@@ -6,11 +6,10 @@ import { Link, useNavigate } from "react-router-dom";
 //
 import { useAppSelector,useAppDispatch } from "../app/hooks";
 import { StateTypeAuth } from "../typeing";
-import { axiospublic } from "../axios/configApi";
-import { actionLogout } from "../redux/actionCreator/actionCreateAuth";
 import InputSearch from "./InputSearch";
 import { opensidebar } from "../features/sidebar/sidebar";
-
+import useAxiosPrivate from "../hook/useAxiosPrivate"
+import { logout } from "../features/auth/auth";
 //interface
 
 interface Props {
@@ -22,10 +21,11 @@ const MenuDesktop: React.FC<Props> = ({ isScrolled }) => {
   const dispatch = useAppDispatch();
   const user = useAppSelector((state: StateTypeAuth) => state?.auth?.userInfo);
   const navigate = useNavigate();
+  const axiosPrivate=useAxiosPrivate()
   const hanlerLogout = async () => {
     try {
-      await axiospublic.get("/auth/logout");
-      dispatch(actionLogout());
+      await axiosPrivate.get("/auth/logout");
+      dispatch(logout());
       navigate("/");
     } catch (error) {}
   };

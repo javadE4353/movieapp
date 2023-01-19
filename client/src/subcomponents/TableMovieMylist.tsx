@@ -194,7 +194,7 @@ const TableMovieMylist = () => {
       );
       dispatch(getPublicCategory());
     }
-  }, []);
+  }, [Mylist?.delete]);
   // update state movies and countMovies
   useEffect(() => {
     Mylist?.mylist && setMovie(Mylist.mylist);

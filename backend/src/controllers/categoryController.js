@@ -1,6 +1,8 @@
+import { validationResult } from "express-validator";
+
+
 import db from "../model/index.js";
 import { responce } from "../util/configResponce.js";
-import { validationResult } from "express-validator";
 import { Op } from "sequelize";
 import sequelize from "sequelize";
 import { paginate } from "../helper/paginate.js";
@@ -10,6 +12,17 @@ export const categoryController = new (class CategoryController {
   constructor() {}
 
   async insertCategory(req, res) {
+
+    const error = validationResult(req);
+    if (!error.isEmpty()) {
+      return responce({
+        res,
+        code: 400,
+        message: "The information entered is incorrect",
+        data: error.array(),
+      });
+    }
+
     if (!req.query.userid) {
       return responce({
         res,
@@ -332,6 +345,16 @@ export const categoryController = new (class CategoryController {
 
   //Edit category
   async updateCategory(req, res) {
+
+    const error = validationResult(req);
+    if (!error.isEmpty()) {
+      return responce({
+        res,
+        code: 400,
+        message: "The information entered is incorrect",
+        data: error.array(),
+      });
+    }
     if (!req.query.userid && !req.query?.bits) {
       return responce({
         res,

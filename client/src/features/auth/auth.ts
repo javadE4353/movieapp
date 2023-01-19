@@ -38,10 +38,11 @@ export const fatchLogin = createAsyncThunk(
 //fatchRegister
 
 interface RegisterType {
-  username: string;
-  mobile: string;
-  email: string;
-  password: string;
+  username: string
+  mobile: string
+  email: string
+  password: string
+  confirm:string
 }
 
 export const fatchRegister = createAsyncThunk(
@@ -57,7 +58,6 @@ export const fatchRefreshToken = createAsyncThunk(
   "auth/fatchRefreshToken",
   async () => {
     const response = await axiospublic.get(`/auth/refreshtoken`);
-    console.log(response?.data)
     return response.data;
   }
 );
@@ -180,9 +180,14 @@ const loginSlice = createSlice({
         state.isLoading = false;
         if (action.error.message?.endsWith("409")) {
           state.errorMessage = "کاربری با این مشخصات از قبل وجود دارد";
-        } else if (action.error.message?.endsWith("401")) {
+        }
+         else if (action.error.message?.endsWith("401")) {
+          state.errorMessage = "رمز ورود مطابقت ندارد";
+        } 
+         else if (action.error.message?.endsWith("400")) {
           state.errorMessage = "اطلاعات وارد شده درست نمی باشد";
-        } else {
+        } 
+        else {
           state.errorMessage = "لطفا بعدا دوباره امتحان کنید";
         }
       })

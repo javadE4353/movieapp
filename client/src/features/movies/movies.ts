@@ -15,7 +15,6 @@ export const fatchmoviesPublic = createAsyncThunk(
   "movies/fatchmoviesPublic",
   async () => {
     const response = await axiospublic.get(`${BASE_URL}/movies/allmovie`);
-    console.log(response.data)
     return response.data.data;
   }
 );

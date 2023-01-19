@@ -10,14 +10,22 @@ import { responce } from "../util/configResponce.js";
 
 export const authController = new (class AuthController {
   async register(req, res) {
-    const { username, email, password, role, mobile } = req.body;
+    const { username, email, password, role, mobile, confirm } = req.body;
 
     const error = validationResult(req);
     if (!error.isEmpty()) {
       return responce({
         res,
-        code: 401,
+        code: 400,
         message: "The information entered is incorrect",
+        data: error.array(),
+      });
+    }
+    if (confirm !== password) {
+      return responce({
+        res,
+        code: 401,
+        message: "پسورد مطابقت ندارد",
         data: error.array(),
       });
     }
@@ -190,36 +198,36 @@ export const authController = new (class AuthController {
         // secure: false,
       });
     }
-try {
-  const token = await db.Token.create({
-    name: refreshToken,
-    userId: fondUser.id,
-  });
-  // set refreshcookie in cookie client
-  res.cookie("jwt", refreshToken, {
-    httpOnly: true,
-    // secure: false,
-    samsite: "Lax",
-    maxAge: 24 * 60 * 60 * 1000,
-  });
-  const userInfo = {
-    role: fondUser?.roles?.[0]?.name,
-    username: fondUser.username,
-    id: fondUser.id,
-  };
-  responce({
-    res,
-    message: `verify${fondUser.username}`,
-    code: 200,
-    data: { userInfo, accessToken },
-  });
-} catch (error) {
-  responce({
-    res,
-    message: `Request Blocked`,
-    code: 500,
-  });
-}
- 
+    try {
+      const token = await db.Token.create({
+        name: refreshToken,
+        userId: fondUser.id,
+      });
+      // set refreshcookie in cookie client
+      res.cookie("jwt", refreshToken, {
+        httpOnly: true,
+        // secure: false,
+        samsite: "Lax",
+        maxAge: 24 * 60 * 60 * 1000,
+      });
+      const userInfo = {
+        role: fondUser?.roles?.[0]?.name,
+        username: fondUser.username,
+        id: fondUser.id,
+        image: fondUser?.image,
+      };
+      responce({
+        res,
+        message: `verify${fondUser.username}`,
+        code: 200,
+        data: { userInfo, accessToken },
+      });
+    } catch (error) {
+      responce({
+        res,
+        message: `Request Blocked`,
+        code: 500,
+      });
+    }
   }
 })();

@@ -38,7 +38,6 @@ function Row({ title, movies, category }: Props) {
       rowRef.current.scrollTo({ left: scrollTo, behavior: "smooth" });
     }
   };
-
   useEffect(() => {
     if (movies) {
       const title = movies.filter((item) => item.genre_ids.includes(category));
@@ -106,11 +105,37 @@ function Row({ title, movies, category }: Props) {
             },
           }}
         >
-          {movies?.map((movie, i) => (
-            <SwiperSlide>
-              <Thumbnail key={movie.id} movie={movie} category={category} />
-            </SwiperSlide>
-          ))}
+          {category === 1 ? (
+            <>
+              {movies?.map((movie, i) => (
+                <>
+                  <SwiperSlide key={i}>
+                    <Thumbnail
+                      key={movie.id}
+                      movie={movie}
+                      category={category}
+                    />
+                  </SwiperSlide>
+                </>
+              ))}
+            </>
+          ) : (
+            <>
+            {movies?.map((movie, i) => (
+              <>
+                <SwiperSlide key={i}>
+                  <Thumbnail
+                    key={movie.id}
+                    movie={movie}
+                    category={category}
+                  />
+                </SwiperSlide>
+              </>
+            ))}
+          </>
+          )
+          
+          }
         </Swiper>
       </div>
     </div>

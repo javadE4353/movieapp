@@ -17,6 +17,10 @@ export const review = (sequelize, DataTypes) => {
         type: DataTypes.STRING(),
         drfaultValue: null,
       },
+      image: {
+        type: DataTypes.STRING(),
+        drfaultValue: null,
+      },
       movietitle: {
         type: DataTypes.STRING(),
         drfaultValue: null,

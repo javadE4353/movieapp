@@ -35,7 +35,7 @@ export const fatchmylist = createAsyncThunk(
   } else if (option?.all) {
     baseUrl = `${url}?all=true`;
   } else if (
-    Object.keys(option).length < 1 ||
+    Object.keys(option).length < 3 ||
     option == null ||
     option == undefined
   ) {
@@ -64,7 +64,7 @@ export const fatchDeleteMylist = createAsyncThunk(
     if (data.page && data.pageSize) {
       baseUrl = `${url}/${data.userid}/?page=${data.page}&pageSize=${data.pageSize}`;
     } else if (
-      Object.keys(data).length < 2 ||
+      Object.keys(data).length < 3 ||
       data == null ||
       data == undefined
     ) {
@@ -132,6 +132,8 @@ const mylistSlice = createSlice({
           state.isLoading = false;
           state.mylist = action.payload.movies;
           state.count = action.payload.count;
+          state.delete=0
+          state.insert=0
         }
       )
       .addCase(fatchmylist.rejected, (state, action) => {
@@ -143,10 +145,14 @@ const mylistSlice = createSlice({
       .addCase(fatchDeleteMylist.pending, (state, action) => {
         state.isLoading = true;
       })
-      .addCase(fatchDeleteMylist.fulfilled, (state, action) => {
+      .addCase(fatchDeleteMylist.fulfilled, (state, 
+        action: PayloadAction<{movies: Movies[]; count: number }>
+        ) => {
         state.isLoading = false;
         state.ErrorMessage = "";
         state.delete = 200;
+        state.mylist = action.payload.movies;
+        state.count = action.payload.count;
       })
       .addCase(fatchDeleteMylist.rejected, (state, action) => {
         state.isLoading = false;

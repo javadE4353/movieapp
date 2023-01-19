@@ -1,3 +1,6 @@
+import { validationResult } from "express-validator";
+
+
 import db from "../model/index.js";
 import { Op } from "sequelize";
 import sequelize from "sequelize";
@@ -6,12 +9,38 @@ import { paginate } from "../helper/paginate.js";
 import bcrypt from "bcrypt";
 
 export const updateUser = async function (req, res) {
+
+  const error = validationResult(req);
+  if (!error.isEmpty()) {
+    return responce({
+      res,
+      code: 400,
+      message: "The information entered is incorrect",
+      data: error.array(),
+    });
+  }
+
   if (!req.body.username) {
     return responce({
       res,
       message: "data invalid",
       code: 400,
       data: {},
+    });
+  }
+ 
+  if (req.body.confirm && req.body.password && req.body.confirm !== req.body.password ) {
+    return responce({
+      res,
+      message: "رمز ورود مطابقت ندارد",
+      code: 401,
+    });
+  }
+  if (!req.body.confirm && req.body.password) {
+    return responce({
+      res,
+      message: "رمز ورود مطابقت ندارد",
+      code: 401,
     });
   }
 
@@ -122,12 +151,33 @@ export const deleteuser = async function (req, res) {
 };
 // createUser
 export const createUser = async function (req, res) {
+
+  const error = validationResult(req);
+  if (!error.isEmpty()) {
+    return responce({
+      res,
+      code: 400,
+      message: "The information entered is incorrect",
+      data: error.array(),
+    });
+  }
+
+  if(!req.body?.username && !req.body?.email && !req.body.password){
+    return res.status(400).send("")
+  }
+  
   const user = await db.user.findOne({
     where: {
       [Op.and]: [{ username: req.body.username }, { email: req.body.email }],
     },
   });
-
+  if (req.body.confirm && req.body.password && req.body.confirm !== req.body.password ) {
+    return responce({
+      res,
+      message: "رمز ورود مطابقت ندارد",
+      code: 403,
+    });
+  }
   if (user) {
     return res.status(409).send("نام کاربری و ایمیل از قبل وجود دارد");
   }

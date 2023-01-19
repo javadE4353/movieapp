@@ -1,12 +1,11 @@
-
 import { body } from "express-validator";
 import { Validatore } from "../validator.js";
-export const validatoreAuth = new (class ValidatoreAuth extends Validatore {
+export const validatoreUser = new (class ValidatoreUser extends Validatore {
   constructor() {
     super();
   }
 
-  register() {
+  createuser() {
     return [
       body("email")
         .isEmail()
@@ -43,21 +42,13 @@ export const validatoreAuth = new (class ValidatoreAuth extends Validatore {
         ),
     ];
   }
-  login() {
+  editeuser() {
     return [
-      body("username")
-        .isLength({ min: 4, max: 21 })
-        .withMessage("user name must be at least 4 cahracters")
-        .notEmpty()
-        .withMessage("Username cannot be empty"),
-        // .not()
-      body("password")
-        .isLength({ min: 8 })
-        .withMessage("password must be at least 8 characters")
-        .matches(/(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-zA-Z])/)
-        .withMessage(
-          "password must contain string, at least one special and one numeric character"
-        ),
-    ];
+        body("username")
+          .isLength({ min: 4, max: 21 })
+          .withMessage("user name must be at least 4 cahracters")
+          .notEmpty()
+          .withMessage("Username cannot be empty"),
+      ];
   }
 })();

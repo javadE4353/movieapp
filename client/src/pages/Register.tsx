@@ -19,10 +19,11 @@ const override: CSSProperties = {
 };
 
 interface Inputs {
-  email: string;
-  username: string;
-  mobile: string;
-  password: string;
+  email: string
+  username: string
+  mobile: string
+  password: string
+  confirm:string
 }
 //component
 function Register() {
@@ -113,7 +114,7 @@ function Register() {
                         ایمیل خود را وارد کنید</p>
                         )}
                       <label className="font-bold text-lg text-white text-center md:text-right">
-                        رمز ورود
+                       (1-9(@$%)(A-Z)) رمز ورود
                       </label>
                       <input
                         type="password"
@@ -122,6 +123,19 @@ function Register() {
                         {...register("password", { required: true })}
                       />
                       {errors.password && (
+                        <p className="text-sm  text-orange-500 text-center md:text-right">
+                        پسورد نمیتواند کمتر از 4 کاراکتر باشد
+                        </p>
+                      )}
+                      <label className="font-bold text-lg text-white text-center md:text-right">
+                       تایید رمز ورود
+                      </label>
+                      <input
+                        type="password"
+                        className="border rounded-lg py-3 px-3 bg-transparent border-indigo-600 placeholder-white-500 text-white"
+                        {...register("confirm", { required: true })}
+                      />
+                      {errors.confirm && (
                         <p className="text-sm  text-orange-500 text-center md:text-right">
                         پسورد نمیتواند کمتر از 4 کاراکتر باشد
                         </p>

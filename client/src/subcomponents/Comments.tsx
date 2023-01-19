@@ -86,7 +86,6 @@ const Comments = ({ ratings, newratings, movie }: Props) => {
 
   const onSubmit = (data: any) => {
     if (user?.userInfo?.id && movie) {
-      console.log(user?.userInfo);
       const dataComent = {
         movieid: movie?.id,
         userId: user?.userInfo?.id,
@@ -94,6 +93,7 @@ const Comments = ({ ratings, newratings, movie }: Props) => {
         movietitle: movie?.title,
         content: data?.textarea,
         ratings: ratings + newratings,
+        image:user?.userInfo?.image
       };
       dispatch(fatchCommentsInsert({data:dataComent, axiosPrivate}));
     }
@@ -184,7 +184,7 @@ const Comments = ({ ratings, newratings, movie }: Props) => {
                         <p className="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white ml-2">
                           <img
                             className="mr-2 w-6 h-6 rounded-full"
-                            src={`${complateDataUser?complateDataUser?.filter(img=>img.id == user?.userInfo?.id )?.[0]?.image:"/"}`}
+                            src={`${com?.image}`}
                             alt="Helene Engels"
                           />
                           {com?.username}

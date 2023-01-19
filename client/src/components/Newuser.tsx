@@ -54,13 +54,14 @@ interface State {
 }
 
 interface Inputs {
-  email: string;
-  username: string;
-  mobile: string;
-  password: string;
-  roleuser: string;
-  profile: string;
+  email: string
+  username: string
+  mobile: string
+  password: string
+  roleuser: string
+  profile: string
   image: string;
+  confirm:string
 }
 
 //component
@@ -96,6 +97,7 @@ const NewUser = () => {
     formData.append("email", data.email);
     formData.append("profile", data.profile);
     formData.append("roleuser", data.roleuser);
+    formData.append("confirm", data.confirm);
     dispatch(fatchInsertUsers({axiosPrivate,data:formData}));
   };
 
@@ -285,6 +287,26 @@ const NewUser = () => {
                         {...register("password", {
                           required: true,
                           pattern: /(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-zA-Z])/,
+                        })}
+                      />
+                    </div>
+                    <div>
+                      <label
+                        form=""
+                        className="block mb-2 text-sm font-medium text-white dark:text-white"
+                      >
+                        {errors.confirm && (
+                          <p className="text-sm  text-orange-500">
+                            تایید رمز ورود
+                          </p>
+                        )}
+                        رمز ورود
+                      </label>
+                      <input
+                        type="text"
+                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                        {...register("confirm", {
+                          required: true,
                         })}
                       />
                     </div>

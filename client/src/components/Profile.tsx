@@ -9,7 +9,7 @@ import { Link, Outlet } from "react-router-dom";
 import { StateTypeAuth, Users } from "../typeing";
 import useAxiosPrivate from "../hook/useAxiosPrivate";
 import { useAppSelector, useAppDispatch } from "../app/hooks";
-import { fatchAllUsers, fatchUsers } from "../features/users/users";
+import { fatchAllUsers, fatchUsers, restartDefault } from "../features/users/users";
 
 //interface
 interface State {
@@ -35,6 +35,7 @@ const Profile = () => {
   useEffect(() => {
     if(user?.userInfo){
       dispatch(fatchAllUsers({ axiosPrivate }));
+      dispatch(restartDefault())
     }
   }, []);
 
@@ -45,7 +46,11 @@ const Profile = () => {
       setUser(USER || []);
     }
   }, [stateUsers?.users]);
-
+  //  Back to default when entering the page
+  useEffect(() => {
+    dispatch(restartDefault())
+    dispatch(fatchAllUsers({ axiosPrivate }));
+  }, [stateUsers?.update]);
   //return
   return (
     <motion.div

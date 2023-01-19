@@ -4,10 +4,13 @@ import verifyRoles from "../../middleware/verifyRole.js";
 import db from "../../model/index.js";
 import upload from "../../middleware/uploadFile.js";
 import { categoryController } from "../../controllers/categoryController.js";
+import { validatoreCategory } from "./validate.js";
 const cateRouter = express.Router();
 
 cateRouter.post(
   "/",
+  verifyToken,
+  verifyRoles(db.ROLES),
   upload.single("image"),
   (req, res, next) => {
     if (!req.file) {
@@ -17,14 +20,15 @@ cateRouter.post(
     }
     next();
   },
-  verifyToken,
-  verifyRoles(db.ROLES),
+  validatoreCategory.createCategory(),
   categoryController.insertCategory
 );
 cateRouter.get("/count", categoryController.getCountCategory);
 cateRouter.get("/", categoryController.getCategory);
 cateRouter.put(
   "/",
+  verifyToken,
+  verifyRoles(db.ROLES),
   upload.single("image"),
   (req, res, next) => {
     if (!req.file) {
@@ -34,8 +38,7 @@ cateRouter.put(
     }
     next();
   },
-  verifyToken,
-  verifyRoles(db.ROLES),
+  validatoreCategory.editeCategory(),
   categoryController.updateCategory
 );
 cateRouter.delete(
