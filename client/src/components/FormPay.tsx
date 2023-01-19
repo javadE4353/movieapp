@@ -15,15 +15,8 @@ import {
 } from "../atoms/modalAtom";
 
 //
-import {
-  deleteUser,
-  getUser,
-  getUsers,
-  insertUser,
-  updateUser,
-} from "../redux/actionCreator/actionCreateUsers";
+
 import { Users, Userinfo, Payment, StateTypeAuth } from "../typeing";
-import { insertSubscription } from "../redux/actionCreator/actionCreatePayment";
 import { useAppSelector, useAppDispatch } from "../app/hooks";
 
 //interface
@@ -88,14 +81,7 @@ const FormPay = ({ data }: Props) => {
       formData.append("account", data?.name);
       formData.append("mobile", Data.mobile);
       formData.append("email", Data.email);
-      dispatch(
-        insertSubscription(
-          formData,
-          user?.userInfo?.id,
-          data?.amount,
-          axiosPrivate
-        )
-      );
+     
     }
   };
   return (

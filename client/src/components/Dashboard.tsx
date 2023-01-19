@@ -3,7 +3,6 @@ import {useEffect}from "react"
 //module external
 import { modalSidebarAdmin } from "../atoms/modalAtom";
 import { useRecoilState } from "recoil";
-import { useSelector } from "react-redux";
 import {
   Outlet,
   useNavigate,

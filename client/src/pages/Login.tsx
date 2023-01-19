@@ -52,7 +52,6 @@ function Login() {
   //stateRedux
   // const loginState = useSelector((state: StateTypeAuth) => state?.auth);
   const auth = useAppSelector((state:StateTypeAuth) => state.auth);
-   console.log(auth)
   //loginfatch
   const onSubmit: SubmitHandler<Inputs> = (data) => {
 

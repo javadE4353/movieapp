@@ -14,7 +14,6 @@ import MoonLoader from "react-spinners/MoonLoader";
 //
 import useAxiosPrivate from "../hook/useAxiosPrivate";
 import { Users,StateTypeAuth, Categories } from "../typeing";
-import {updateCategory } from "../redux/actionCreator/actionCreateCategory";
 import { useAppSelector, useAppDispatch } from "../app/hooks";
 import { fatchUpdateCategory } from "../features/categorys/category";
 

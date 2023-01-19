@@ -28,8 +28,6 @@ import { modalMylist, modalState, movieState } from "../atoms/modalAtom";
 import { BsX } from "react-icons/bs";
 import useAxiosPrivate from "../hook/useAxiosPrivate";
 import Comments from "../subcomponents/Comments";
-import { getComments } from "../redux/actionCreator/actionCreateComment";
-import axios from "axios";
 import { BASE_URL } from "../axios/configApi";
 import { useAppSelector, useAppDispatch } from "../app/hooks";
 import { fatchInsertRating, fatchRetings } from "../features/ratings/review";

@@ -1,6 +1,5 @@
 //module external
 import { HiMenuAlt3 } from "react-icons/hi";
-import { Dispatch } from "redux";
 import { Link, useNavigate } from "react-router-dom";
 
 //

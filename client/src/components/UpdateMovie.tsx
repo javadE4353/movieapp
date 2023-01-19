@@ -11,8 +11,6 @@ import "react-datepicker/dist/react-datepicker.css";
 import useAxiosPrivate from "../hook/useAxiosPrivate";
 import { Users, Movies, StateTypeAuth, Categories } from "../typeing";
 import { modalCreateUser } from "../atoms/modalAtom";
-import { getPublicCategory } from "../redux/actionCreator/actionCreateCategory";
-import { updatemovie } from "../redux/actionCreator/actionMovie";
 import { useAppSelector, useAppDispatch } from "../app/hooks";
 import { fatchUpdateMovies } from "../features/movies/movies";
 import { fatchCategorysPublic } from "../features/categorys/category";

@@ -19,7 +19,6 @@ import { Users, StateTypeAuth, Categories, Movies } from "../typeing";
 import getCategorys, {
   getPublicCategory,
 } from "../redux/actionCreator/actionCreateCategory";
-import { insertmovie } from "../redux/actionCreator/actionMovie";
 import { useAppSelector, useAppDispatch } from "../app/hooks";
 import { fatchInsertMovies } from "../features/movies/movies";
 

@@ -5,7 +5,6 @@ import { useState,CSSProperties,useEffect} from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import ClipLoader from "react-spinners/ClipLoader";
 import { motion } from "framer-motion";
-import { Dispatch } from "redux";
 import MuiModal from "@mui/material/Modal";
 import { HiOutlineXMark } from "react-icons/hi2";
 import { useNavigate } from "react-router-dom";
@@ -15,7 +14,6 @@ import MoonLoader from "react-spinners/MoonLoader";
 //
 import useAxiosPrivate from "../hook/useAxiosPrivate";
 import { Users,StateTypeAuth, Categories } from "../typeing";
-import { insertCaegory } from "../redux/actionCreator/actionCreateCategory";
 import { useAppSelector, useAppDispatch } from "../app/hooks";
 import { fatchInsertCategory } from "../features/categorys/category";
 

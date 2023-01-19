@@ -3,10 +3,8 @@ import { useState, useEffect, useCallback, CSSProperties } from "react";
 //module external
 import { AnimatePresence, motion } from "framer-motion";
 import { useRecoilState } from "recoil";
-import { Dispatch } from "redux";
 import * as timeago from "timeago.js/lib/index";
 import { HiPencil, HiMinus, HiPlus } from "react-icons/hi2";
-import { useSelector, useDispatch } from "react-redux";
 import { BsX } from "react-icons/bs";
 import {
   HiTrash,
@@ -21,7 +19,6 @@ import { Link, Outlet } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "../app/hooks";
 import { pageinationAtom } from "../atoms/modalAtom";
 import useAxiosPrivate from "../hook/useAxiosPrivate";
-import { deleteUser, getUsers } from "../redux/actionCreator/actionCreateUsers";
 import { Users, StateTypeAuth } from "../typeing";
 import Pageination from "./Pagination";
 import { head } from "../data/tableViewUsers";

@@ -21,25 +21,10 @@ interface Props {
 
 function Category({ movie, gener }: Props) {
   const [showalret, setShowAlert] = useRecoilState(showAlert);
-  const [fatch, setfatch] = useState([]);
 
   //accessToken
   const accesstoken = useAppSelector((state: StateTypeAuth) => state?.auth);
-  useEffect(()=>{
-
-
-    const re=async()=>{
-      try{
-        const {data}=await axios.get('https://api.themoviedb.org/3/discover/movie?api_key=0f03ae9e9244ff0b99b6ca724f605bad&language=en-US&with_genres=99');
-        console.log(data)
-        setfatch(data?.results)
-      }catch(error){
-        console.log(error)
   
-      }
-    }
-    re()
-  },[])
   return (
     <>
       <div
@@ -63,11 +48,9 @@ function Category({ movie, gener }: Props) {
         <>
           {movie ? (
             <>
-              {fatch?.map((item:any) => (
+              {movie?.map((item:any) => (
                 <div className="flex flex-wrap">
-                  <img src={`https://image.tmdb.org/t/p/original${item?.poster_path}`}/>
-                  <span>{item.title}</span>
-                  {/* {gener === 0 ? (
+                  {gener === 0 ? (
                     <>
                       <Card key={item.id} movie={item} />
                     </>
@@ -76,7 +59,7 @@ function Category({ movie, gener }: Props) {
                       movie?.genre_ids.includes(gener) &&{" "}
                       <Card key={item.id} movie={item} />
                     </>
-                  )} */}
+                  )}
                 </div>
               ))}
             </>

@@ -2,7 +2,6 @@ import { useEffect, useState, CSSProperties } from "react";
 
 //module external
 
-import { Dispatch } from "redux";
 import { useForm, SubmitHandler } from "react-hook-form";
 import * as timeago from "timeago.js/lib/index";
 import MuiModal from "@mui/material/Modal";
@@ -13,11 +12,7 @@ import {
 } from "react-icons/hi2";
 
 //
-import {
-  DeleteComment,
-  getComments,
-  insertComment,
-} from "../redux/actionCreator/actionCreateComment";
+
 import { CommentType, Movies, Ratings, StateTypeAuth, Users } from "../typeing";
 import useAxiosPrivate from "../hook/useAxiosPrivate";
 import { useAppSelector, useAppDispatch } from "../app/hooks";

@@ -26,8 +26,8 @@ import { tableMovies } from "../data/dataTableMovies";
 import { useNavigate } from "react-router-dom";
 import  { BASE_URL } from "../axios/configApi";
 import { filterRow } from "../data/filter";
-import { getPublicCategory } from "../redux/actionCreator/actionCreateCategory";
 import { fatchDeleteMylist, fatchmylist } from "../features/mylist/mylist";
+import { fatchCategorysPublic } from "../features/categorys/category";
 
 //interface
 
@@ -192,7 +192,7 @@ const TableMovieMylist = () => {
           pageSize: filterow,
         })
       );
-      dispatch(getPublicCategory());
+      dispatch(fatchCategorysPublic());
     }
   }, [Mylist?.delete]);
   // update state movies and countMovies
