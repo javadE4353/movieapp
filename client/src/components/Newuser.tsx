@@ -13,13 +13,6 @@ import MoonLoader from "react-spinners/MoonLoader";
 //
 import useAxiosPrivate from "../hook/useAxiosPrivate";
 
-import {
-  deleteUser,
-  getUser,
-  getUsers,
-  insertUser,
-  updateUser,
-} from "../redux/actionCreator/actionCreateUsers";
 import { Users, Userinfo } from "../typeing";
 import { modalCreateUser, modalEditUser } from "../atoms/modalAtom";
 import { useAppSelector, useAppDispatch } from "../app/hooks";

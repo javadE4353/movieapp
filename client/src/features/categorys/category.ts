@@ -13,7 +13,7 @@ export const fatchCategorysPublic = createAsyncThunk(
   "categorys/fatchCategorysPublic",
   async () => {
     const res = await axiospublic.get(`/category`);
-    return res.data.data;
+    return res.data.data.categorys;
   }
 );
 
@@ -127,14 +127,12 @@ type Initialstate = {
 };
 
 const initialState: Initialstate = {
-  categorys: [],
-  categoryPublic: localStorage.getItem("allCategorys")
-    ? JSON.parse(localStorage.getItem("allCategorys") || `[]`)
-    : [],
+  categorys:JSON.parse(sessionStorage.getItem("categorysTable") || '[]')?.length>0?JSON.parse(sessionStorage.getItem("categorysTable")|| "[]") :[],
+  categoryPublic:JSON.parse(sessionStorage.getItem("categorys") || '[]')?.length>0?JSON.parse(sessionStorage.getItem("categorys")|| "[]") :[],
   update: 0,
   delete: 0,
   insert: 0,
-  count: 0,
+  count:JSON.parse(sessionStorage.getItem("countTable") || '0')>0?JSON.parse(sessionStorage.getItem("countTable") || "0") :0,
   isLoading: false,
   ErrorMassege: "",
 };
@@ -163,13 +161,10 @@ const categorySlice = createSlice({
       })
       .addCase(
         fatchCategorysPublic.fulfilled,
-        (state, action: PayloadAction<{ categorys: Categories[] }>) => {
+        (state, action: PayloadAction<Categories[]>) => {
           state.isLoading = false;
-          state.categoryPublic = action.payload.categorys;
-          localStorage.setItem(
-            "allCategorys",
-            JSON.stringify(action.payload.categorys)
-          );
+          state.categoryPublic = action.payload;
+          sessionStorage.setItem("categorys",JSON.stringify( action.payload))
         }
       )
       .addCase(fatchCategorysPublic.rejected, (state, action) => {
@@ -190,6 +185,9 @@ const categorySlice = createSlice({
           state.isLoading = false;
           state.categorys = action.payload.categorys;
           state.count = action.payload.count;
+          sessionStorage.setItem("categorysTable",JSON.stringify( action.payload.categorys))
+          sessionStorage.setItem("countTable",JSON.stringify(  action.payload.count))
+
         }
       )
       .addCase(fatchCategorys.rejected, (state, action) => {

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 //
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -9,17 +9,23 @@ import "swiper/css/scrollbar";
 //
 
 import SliderItemHome from "../subcomponents/SliderItemHome";
-import { Movies, } from "../typeing";
+import { Movies } from "../typeing";
 //interface
 interface Props {
-  banner: Movies;
+  banner: Movies[];
 }
 //component
 const SliderHome = ({ banner }: Props) => {
- 
+  const [Banner, setBanner] = useState<Movies>();
+
+  useEffect(() => {
+    if (banner) {
+      setBanner(banner?.[Math.floor(Math.random() * banner.length)]);
+    }
+  }, []);
   return (
     <div className="flex flex-col space-y-2 py-16 md:space-y-4 lg:h-[65vh] lg:justify-end lg:pb-12">
-    {/* <Swiper
+      {/* <Swiper
           slidesPerView={1}
           loop={false}
         >
@@ -28,8 +34,8 @@ const SliderHome = ({ banner }: Props) => {
                  <img src={`${banner?.poster_path}`}/>
             </SwiperSlide>
         </Swiper> */}
-    {banner && <SliderItemHome item={banner} />}
-   </div>
+      {Banner && <SliderItemHome item={Banner} />}
+    </div>
   );
 };
 

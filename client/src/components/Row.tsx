@@ -25,6 +25,7 @@ function Row({ title, movies, category }: Props) {
   const [isMoved, setIsMoved] = useState(false);
   //title
   const [Title, setTitle] = useState<string | number>("");
+  const [movie, setMovie] = useState<Movies[]>([]);
 
   const handleClick = (direction: string) => {
     setIsMoved(true);
@@ -40,6 +41,7 @@ function Row({ title, movies, category }: Props) {
   };
   useEffect(() => {
     if (movies) {
+      setMovie(movies)
       const title = movies.filter((item) => item.genre_ids.includes(category));
 
       if (title) setTitle(title[0]?.genre_ids[0]);
@@ -107,7 +109,7 @@ function Row({ title, movies, category }: Props) {
         >
           {category === 1 ? (
             <>
-              {movies?.map((movie, i) => (
+              {movie?.map((movie, i) => (
                 <>
                   <SwiperSlide key={i}>
                     <Thumbnail
@@ -121,21 +123,21 @@ function Row({ title, movies, category }: Props) {
             </>
           ) : (
             <>
-            {movies?.map((movie, i) => (
-              <>
-                <SwiperSlide key={i}>
-                  <Thumbnail
-                    key={movie.id}
-                    movie={movie}
-                    category={category}
-                  />
-                </SwiperSlide>
-              </>
-            ))}
-          </>
-          )
-          
-          }
+              {movie?.map((movie, i) => (
+                <>
+                  {movie?.genre_ids?.includes(category) && (
+                    <SwiperSlide key={i}>
+                      <Thumbnail
+                        key={movie.id}
+                        movie={movie}
+                        category={category}
+                      />
+                    </SwiperSlide>
+                  )}
+                </>
+              ))}
+            </>
+          )}
         </Swiper>
       </div>
     </div>

@@ -16,9 +16,6 @@ export const fatchComments = createAsyncThunk(
     const response = await option.axiosPrivate.get(
         `${BASE_URL}/review?movieid=${option.movieid}&movietitle=${option.movietitle}`
       );
-      console.log(response.data.data)
-      console.log(option)
-
     return response.data.data;
   }
 );
@@ -36,7 +33,6 @@ export const fatchCommentsInsert = createAsyncThunk(
         const res = await option.axiosPrivate.get(
           `${BASE_URL}/review?movieid=${option.data.movieid}&movietitle=${option.data.movietitle}`
         );
-        console.log(res.data)
         return res.data.data
       }
   }

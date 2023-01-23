@@ -67,7 +67,9 @@ const ConfigPages = () => {
   //stateRedux
   const movies = useSelector((state: MoviesType) => state?.movies?.Allmovie);
   const mylist = useSelector((state: Mylist) => state?.mylist.mylist);
-  const categorys = useSelector((state: Categorys) => state?.categorys?.categorys);
+  const categorys = useSelector(
+    (state: Categorys) => state?.categorys?.categorys
+  );
   //
   const location = useLocation();
 
@@ -88,7 +90,7 @@ const ConfigPages = () => {
   //return
   return (
     <AnimatePresence exitBeforeEnter>
-       <Routes location={location} key={location.pathname}>
+      <Routes location={location} key={location.pathname}>
         {/* Route default */}
         <Route path="/login" element={<Login />}></Route>
         <Route path="/register" element={<Register />}></Route>
@@ -110,14 +112,14 @@ const ConfigPages = () => {
         </Route>
         {/* Role Admin */}
         <Route element={<RequiredAuth allowedRoles={[ROLES.Admin]} />}>
-          <Route path="/dashboard" element={<Dashboard path={"admin"} />}>
+          <Route path="/admin" element={<Dashboard />}>
             {/* TABLEUSERS */}
             <Route path="users" element={<ViewTableUser />}>
               <Route path="update/:id" element={<EditUser path={"users"} />} />
               <Route path="insert" element={<NewUser />} />
             </Route>
             {/* PROFILE */}
-            <Route path="profile" element={<Profile />}>
+            <Route path="" element={<Profile />}>
               <Route path="edit/:id" element={<EditUser path={"profile"} />} />
             </Route>
             {/* TABLEMOVIES */}
@@ -144,9 +146,9 @@ const ConfigPages = () => {
         </Route>
         {/* Role User */}
         <Route element={<RequiredAuth allowedRoles={[ROLES.User]} />}>
-          <Route path="/dashboard/me" element={<Dashboard path={"user"} />}>
+          <Route path="/dashboard" element={<Dashboard />}>
             <Route path="mylist" element={<TableMovieMylist />}></Route>
-            <Route path="profile" element={<Profile />}>
+            <Route path="" element={<Profile />}>
               <Route path="edit/:id" element={<EditUser path={"profile"} />} />
             </Route>
             <Route path="*" element={<Notfount />}></Route>

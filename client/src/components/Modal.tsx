@@ -493,19 +493,6 @@ function Modal() {
           </div>
         </>
       </MuiModal>
-      <MuiModal
-        open={mylist?.isLoading}
-        className="fixed !top-7 left-0 right-0 z-50 mx-auto w-full max-w-5xl overflow-hidden overflow-y-scroll rounded-md scrollbar-hide"
-      >
-        <ClipLoader
-          color={color}
-          loading={mylist?.isLoading}
-          cssOverride={override}
-          size={50}
-          aria-label="Loading Spinner"
-          data-testid="loader"
-        />
-      </MuiModal>
     </>
   );
 }

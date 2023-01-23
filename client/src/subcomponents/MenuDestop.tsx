@@ -82,9 +82,9 @@ const MenuDesktop: React.FC<Props> = ({ isScrolled }) => {
             }`}
           >
             {user?.role === "admin" ? (
-              <Link to="/dashboard">پنل کاربری</Link>
+              <Link to="/admin">پنل کاربری</Link>
             ) : (
-              <Link to="/dashboard/me">پنل کاربری</Link>
+              <Link to="/dashboard">پنل کاربری</Link>
             )}
           </li>
           {/* {user?.username ? (

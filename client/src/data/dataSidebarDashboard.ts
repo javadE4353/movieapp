@@ -8,12 +8,12 @@ import { FiFolder } from "react-icons/fi";
 export const menusUser = [
   {
     name: "پروفایل",
-    link: "/dashboard/me/profile",
+    link: "/dashboard",
     icon: HiOutlineUserCircle,
   },
   {
     name: "لیست من",
-    link: "/dashboard/me/mylist",
+    link: "/dashboard/mylist",
     icon: FiFolder,
     margin: false,
   },
@@ -25,13 +25,13 @@ export const menusUser = [
   },
 ];
 export const menusAdmin = [
-  { name: "پروفایل", link: "/dashboard/profile", icon: HiOutlineUserCircle },
-  { name: "کاربران", link: "/dashboard/users", icon: HiOutlineUsers },
-  { name: "دسته بندی", link: "/dashboard/category", icon: FiFolder, margin: false },
-  { name: "فیلم", link: "/dashboard/movies", icon: FiFolder, margin: false },
-  { name: "لیست من", link: "/dashboard/mylist", icon: FiFolder, margin: false },
-  { name: " گزارش", link: "/dashboard/report", icon: FiFolder, margin: false },
-  { name: " تنظیمات", link: "/dashboard/setting", icon: FiFolder, margin: false },
+  { name: "پروفایل", link: "/admin", icon: HiOutlineUserCircle },
+  { name: "کاربران", link: "/admin/users", icon: HiOutlineUsers },
+  { name: "دسته بندی", link: "/admin/category", icon: FiFolder, margin: false },
+  { name: "فیلم", link: "/admin/movies", icon: FiFolder, margin: false },
+  { name: "لیست من", link: "/admin/mylist", icon: FiFolder, margin: false },
+  { name: " گزارش", link: "/admin/report", icon: FiFolder, margin: false },
+  { name: " تنظیمات", link: "/admin/setting", icon: FiFolder, margin: false },
   {
     name: "خروج",
     link: "/",

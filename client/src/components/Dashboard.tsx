@@ -1,4 +1,4 @@
-import {useEffect}from "react"
+import { useEffect } from "react";
 
 //module external
 import { modalSidebarAdmin } from "../atoms/modalAtom";
@@ -14,42 +14,33 @@ import {
 //
 import SidebarDashboard from "../subcomponents/Sidebardashboard";
 import { StateTypeAuth, Userinfo } from "../typeing";
+import { useAppSelector } from "../app/hooks";
 
 //interface
-interface Props{
-  path:string
-}
 
 //component
-const Dashboard = ({path}:Props) => {
-  const navigate=useNavigate()
+const Dashboard = () => {
+  const user = useAppSelector((state: StateTypeAuth) => state?.auth);
   const [Sidebar, setSidebar] = useRecoilState(modalSidebarAdmin);
-const loc=useLocation()
-  useEffect(()=>{
-
-    if(loc.pathname == "/dashboard" && path == "admin")
-    navigate(`/dashboard/profile`)
-    else if(loc.pathname == "/dashboard/me" && path == "user")
-    navigate(`/dashboard/me/profile`)
-
-  },[])
+  const location = useLocation();
   return (
-    <section>
-      <div className="flex overflow-hidden overflow-x-auto">
-        <div
-          className={`transition-all ${
-            Sidebar ? "grow-0 shrink" : "grow-0 shrink	"
-          }`}
-        >
-          <SidebarDashboard />
+    <>
+{ sessionStorage.getItem("accesstoken")?(<section>
+        <div className="flex overflow-hidden overflow-x-auto">
+          <div
+            className={`transition-all ${
+              Sidebar ? "grow-0 shrink" : "grow-0 shrink	"
+            }`}
+          >
+            <SidebarDashboard />
+          </div>
+          <div className={`${Sidebar ? "grow" : "grow"}`}>
+            <Outlet />
+          </div>
         </div>
-        <div className={`${
-            Sidebar ? "grow" : "grow"
-          }`}>
-          <Outlet />
-        </div>
-      </div>
-    </section>
+      </section>)
+      :(<Navigate to="/login" state={{ from: location }} replace />)}
+    </>
   );
 };
 

@@ -68,9 +68,7 @@ interface Categorys {
 const Home: React.FC = () => {
   let [color, setColor] = useState("#ffffff");
   const [showalret, setShowAlert] = useState(true);
-  const [cat, setCat] = useState<Categories[]>([]);
-  const [banner, setBanner] = useState<Movies>();
-
+ 
   //
   const mylist = useAppSelector((state: Mylist) => state?.mylist);
   const user = useAppSelector((state: StateTypeAuth) => state.auth);
@@ -91,47 +89,13 @@ const Home: React.FC = () => {
     if (user?.accessToken && user?.userInfo?.id) {
       dispatch(fatchmylist({ axiosPrivate, userid: user.userInfo.id }));
     }
-  }, [location.pathname, user?.accessToken]);
+  }, [user?.accessToken]);
 
-  useEffect(() => {
-    const storag = localStorage.getItem("allCategorys");
-    if (storag) {
-      const categoryStorag = JSON.parse(storag);
-
-      const cat = categoryStorag?.filter((item: Categories) => {
-        if (item.bits !== 1 && item.bits !== 100) {
-          return item;
-        }
-      });
-      if (cat) setCat(cat);
-      return;
-    } else if (categorys) {
-      const cat = categorys?.filter((item) => {
-        if (item.bits !== 1 && item.bits !== 100) {
-          return item;
-        }
-      });
-      if (cat) setCat(cat);
-    }
-  }, [categorys, location.pathname]);
-  //
-  useEffect(() => {
-    const storag = localStorage.getItem("Allmovie");
-    if (storag) {
-      const movieStorag = JSON.parse(storag);
-      setBanner(movieStorag?.[Math.floor(Math.random() * movieStorag.length)]);
-      return;
-    } else if (movies) {
-      setBanner(movies?.[Math.floor(Math.random() * movies.length)]);
-    }
-  }, [movies, location.pathname]);
-
-  
   //return
   return (
     <div className="relative">
       <Header />
-      {cat?.length > 0 ? (
+      {categorys?.length > 0 && movies ? (
         <div className="relative h-auto bg-gradient-to-b from-[#141414] to-[#141414] lg:h-auto overflow-hidden">
           <div
             className={`fixed top-0 z-[999] bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative ${
@@ -152,27 +116,39 @@ const Home: React.FC = () => {
           </div>
           <main className="relative">
             <>
-              {banner && (
+              {movies && (
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                 >
-                  <SliderHome banner={banner} />
+                  <SliderHome banner={movies} />
                 </motion.div>
               )}
               <div className={`${toggle ? "block" : "hidden"}`}>
-                {user?.userInfo?<Sidebar role={user?.userInfo?.role} />:<Sidebar role={"user"} />}
+                {user?.userInfo ? (
+                  <Sidebar role={user?.userInfo?.role} />
+                ) : (
+                  <Sidebar role={"user"} />
+                )}
               </div>
               <section className="md:space-y-24 mt-[20%] sm:mt-[25%] md:mt-[25%] lg:mt-[25%] xl:mt-[30%]">
-                {cat?.length > 0
-                  ? cat?.map((item, i) => (
-                      <Row
-                        key={i}
-                        title={item?.title}
-                        movies={movies}
-                        category={item?.bits}
-                      />
+                {categorys?.length > 0
+                  ? categorys?.map((item, i) => (
+                      <>
+                        {item.bits !== 1 && (
+                          <>
+                            {item.bits !== 100 ? (
+                              <Row
+                                key={i}
+                                title={item?.title}
+                                movies={movies}
+                                category={item?.bits}
+                              />
+                            ) : null}
+                          </>
+                        )}
+                      </>
                     ))
                   : null}
                 {user?.accessToken ? (

@@ -150,9 +150,9 @@ interface InitialState {
   }
   
   const initialState:InitialState = {
-    movies: [],
-    Allmovie:[],
-    count:0,
+    movies:JSON.parse(sessionStorage.getItem("moviesTable") || '[]')?.length>0?JSON.parse(sessionStorage.getItem("moviesTable")|| "[]") :[],
+    Allmovie:JSON.parse(sessionStorage.getItem("movies") || '[]')?.length>0?JSON.parse(sessionStorage.getItem("movies")|| "[]") :[],
+    count:JSON.parse(sessionStorage.getItem("countMovie") || '0')>0?JSON.parse(sessionStorage.getItem("countMovie") || "0") :0,
     insert: 0,
     update: 0,
     delete: 0,
@@ -184,14 +184,8 @@ const movieSlice = createSlice({
         fatchmoviesPublic.fulfilled,
         (state, action: PayloadAction< Movies[]>) => {
           state.isLoading = false;
-          const local=localStorage.getItem("allmovies");
-           if(local && local !=="[]" && local !== "undefined" && local !== ""){
-            state.Allmovie = JSON.parse(local)
-           }else{
-            state.Allmovie = action.payload;
-            localStorage.setItem("allmovies",JSON.stringify(action.payload)
-              );
-           }
+          state.Allmovie=action.payload
+          sessionStorage.setItem("movies",JSON.stringify(action.payload))
         }
       )
       .addCase(fatchmoviesPublic.rejected, (state, action) => {
@@ -212,6 +206,9 @@ const movieSlice = createSlice({
           state.isLoading = false;
           state.movies = action.payload.movies;
           state.count = action.payload.count;
+          sessionStorage.setItem("moviesTable",JSON.stringify(action.payload.movies))
+          sessionStorage.setItem("countMovie",JSON.stringify(action.payload.count))
+
         }
       )
       .addCase(fatchmovies.rejected, (state, action) => {

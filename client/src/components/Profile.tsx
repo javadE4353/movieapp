@@ -53,11 +53,7 @@ const Profile = () => {
   }, [stateUsers?.update]);
   //return
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1, transition: { duration: 0.2 } }}
-      exit={{ opacity: 0, transition: { duration: 0.1 } }}
-    >
+    <div>
       <section className=" bg-[#071e34] flex font-medium items-center justify-center h-screen">
         <section className="w-64 mx-auto bg-[#20354b] rounded-2xl px-8 py-6 shadow-lg">
           <div className="flex items-center justify-between">
@@ -76,9 +72,7 @@ const Profile = () => {
           <div className="mt-6 w-fit mx-auto">
             <img
               src={
-                users[0]?.image ||
-                "https://api.lorem.space/image/face?w=120&h=120&hash=bart89fe"
-              }
+                users[0]?.image }
               className="rounded-full w-28 "
               alt={user?.userInfo?.username}
             />
@@ -102,7 +96,7 @@ const Profile = () => {
         </section>
       </section>
       <Outlet />
-    </motion.div>
+    </div>
   );
 };
 

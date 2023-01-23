@@ -22,7 +22,7 @@ const app = express();
 
 // connectDB
 connectDB();
-
+app.use( express.static('public'))
 //middleware
 app.use(credentials);
 app.use(cors(corsOption));
@@ -36,7 +36,7 @@ const PORT =
   process.env.NODE_ENV === "production" ? process.env.PORTSR || 80 : 3500;
 const HOSTNAME =
   process.env.NODE_ENV === "production"
-    ? process.env.HOSTNAMESERVER || "localhost": "localhost";
+    ? process.env.HOSTNAMESERVER || "127.0.0.1": "127.0.0.1";
 app.listen(PORT, HOSTNAME, () => {
   console.log(chalk.bgYellow(app.get("env")));
   console.log(chalk.bgGreen(`connected server${HOSTNAME}:${PORT}`));

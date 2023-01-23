@@ -206,19 +206,6 @@ const TableMovieMylist = () => {
   //return
   return (
     <>
-      <MuiModal
-        open={Mylist?.isLoading ? true : false}
-        className="fixed top-7 left-0 right-0 z-50 mx-auto w-full max-w-5xl overflow-hidden overflow-y-scroll rounded-md scrollbar-hide"
-      >
-        <MoonLoader
-          color={"#36d7b7"}
-          loading={Mylist?.isLoading ? true : false}
-          cssOverride={overrideupdate}
-          size={50}
-          aria-label="Loading Spinner"
-          data-testid="loader"
-        />
-      </MuiModal>
       {/* <!-- Mobile filter dialog --> */}
       <AnimatePresence>
         {/* {toggleSidebarFilterM && */}

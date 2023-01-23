@@ -29,9 +29,13 @@ const SidebarDashboard = () => {
   const [Sidebar, setSidebar] = useRecoilState(modalSidebarAdmin);
 
   useEffect(() => {
-    user?.userInfo?.role === "admin"
+    const user=sessionStorage.getItem("accesstoken");
+    const token= user && JSON.parse(user);
+    if(token){
+      token?.userInfo?.role === "admin"
       ? setMenus(menusAdmin)
       : setMenus(menusUser);
+    }
   }, []);
 
   const handleSidebarCollaps = () => {

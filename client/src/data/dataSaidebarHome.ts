@@ -9,15 +9,15 @@ export interface Menus {
     margin?: boolean | undefined;
   }
 export const menuAdmin = [
-  { name: "پنل کاربری", link: "/dashboard", icon: MdOutlineDashboard },
+  { name: "پنل کاربری", link: "/admin", icon: MdOutlineDashboard },
   { name: "اکشن", link: "/action", icon: FiFolder, margin: true },
   { name: "برترین ها", link: "/comady", icon: FiFolder },
   { name: "سریال", link: "/action", icon: FiFolder },
   { name: "لیست من", link: "/mylist", icon: FiFolder },
-  { name: "کاربران", link: "/dashboard/users", icon: BsPeopleFill },
+  { name: "کاربران", link: "/admin/users", icon: BsPeopleFill },
 ];
 export const menuUser = [
-  { name: "پنل کاربری", link: "/dashboard/me", icon: MdOutlineDashboard },
+  { name: "پنل کاربری", link: "/dashboard", icon: MdOutlineDashboard },
   { name: "اکشن", link: "/action", icon: FiFolder, margin: true },
   { name: "برترین ها", link: "/comady", icon: FiFolder },
   { name: "سریال", link: "/action", icon: FiFolder },

@@ -42,14 +42,13 @@ const SliderItemHome = ({ item }: Props) => {
   };
   return (
     <>
-       <div className="flex flex-col space-y-2 py-16 md:space-y-4 lg:h-[100vh] lg:justify-end lg:pb-12">
+       <div className="flex flex-col space-y-2 py-16 md:space-y-4 lg:h-[100vh] w-full lg:justify-end lg:pb-12">
         <div className="absolute top-0 left-0 -z-10 h-[95vh] w-full">
           {item && (
-            <LazyLoadImage
+            <img
             src={`${item?.poster_path}`}
             className="object-cover w-full"
-            placeholderSrc={`${item?.title}`}
-            effect="blur"
+            alt={`${item?.title}`}
             />
           )}
         </div>

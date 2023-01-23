@@ -2,7 +2,6 @@ import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { Users } from "../../typeing";
 import { BASE_URL } from "../../axios/configApi";
 import { AxiosInstance } from "axios";
-import usersReducer from "../../redux/reducers/userReducer/userReducer";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 //fatchUsers
@@ -54,7 +53,6 @@ export const fatchUsers = createAsyncThunk(
     }
     // console.log(baseUrl);
     const response = await option.axiosPrivate.get(`${baseUrl}`);
-    console.log(response.data.data[0]);
     return {
       users: response.data.data[0],
       count: response.data.data[1].count.count,
@@ -96,7 +94,6 @@ export const fatchUpdateUsers = createAsyncThunk(
       `${BASE_URL}/users/${data.id}`,
       data.data
     );
-    console.log(data.data.get("roleuser"))
 
     if (response?.status == 200) {
       const res = await data.axiosPrivate.get(`${BASE_URL}/users`);
@@ -117,7 +114,6 @@ export const fatchInsertUsers = createAsyncThunk(
       `${BASE_URL}/users`,
       data.data
     );
-    console.log(response.data.data);
     return response.data.data;
   }
 );
@@ -135,12 +131,10 @@ interface InitialState {
 }
 
 const initialState: InitialState = {
-  users: localStorage.getItem("users")
-    ? JSON.parse(localStorage.getItem("users") || `[]`)
-    : [],
+  users: sessionStorage.getItem("users")? JSON.parse(sessionStorage.getItem("users") || `[]`): [],
   allusres: [],
   insert: 0,
-  count: 0,
+  count: sessionStorage.getItem("countUsers")? JSON.parse(sessionStorage.getItem("countUsers") || `0`): 0,
   update: 0,
   delete: 0,
   isLoading: false,
@@ -219,6 +213,8 @@ const usersSlice = createSlice({
           state.delete = 200;
           state.users = action.payload.users;
           state.count = action.payload.count;
+          sessionStorage.setItem("users",JSON.stringify(action.payload.users))
+          sessionStorage.setItem("countUsers",JSON.stringify(action.payload.count))
           toast("حذف با موفقیت انجام شد", {
             position: "top-left",
             autoClose: 5000,
