@@ -27,9 +27,6 @@ import Pageination from "../subcomponents/Pagination";
 import { Link } from "react-router-dom";
 import { axiospublic, BASE_URL } from "../axios/configApi";
 import { tableCategory } from "../data/dataTableCategory";
-import getCategorys, {
-  deleteCatgory,
-} from "../redux/actionCreator/actionCreateCategory";
 import { filterRow } from "../data/filter";
 import { useAppSelector, useAppDispatch } from "../app/hooks";
 import {

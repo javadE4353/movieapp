@@ -9,7 +9,7 @@ import ClipLoader from "react-spinners/ClipLoader";
 import { motion } from "framer-motion";
 
 //
-import loginAction from "../redux/actionCreator/actionCreateAuth";
+
 import { Movies, StateTypeAuth, Userinfo } from "../typeing";
 import { fatchLogin, removeMessage } from "../features/auth/auth";
 import { useAppSelector,useAppDispatch } from "../app/hooks";

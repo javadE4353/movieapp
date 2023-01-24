@@ -11,7 +11,6 @@ import { useAppSelector, useAppDispatch } from "../app/hooks";
 //type
 import { Movies, StateTypeAuth } from "../typeing";
 import axios from "axios";
-import { useEffect, useState } from "react";
 
 //interface
 interface Props {
