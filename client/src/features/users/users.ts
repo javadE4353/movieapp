@@ -213,8 +213,10 @@ const usersSlice = createSlice({
           state.delete = 200;
           state.users = action.payload.users;
           state.count = action.payload.count;
-          sessionStorage.setItem("users",JSON.stringify(action.payload.users))
-          sessionStorage.setItem("countUsers",JSON.stringify(action.payload.count))
+          if(action.payload?.users){
+            sessionStorage.setItem("users",JSON.stringify(action.payload.users))
+            sessionStorage.setItem("countUsers",JSON.stringify(action.payload.count))
+          }
           toast("حذف با موفقیت انجام شد", {
             position: "top-left",
             autoClose: 5000,

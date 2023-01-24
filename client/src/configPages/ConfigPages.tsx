@@ -89,7 +89,7 @@ const ConfigPages = () => {
 
   //return
   return (
-    <AnimatePresence exitBeforeEnter>
+    <AnimatePresence>
       <Routes location={location} key={location.pathname}>
         {/* Route default */}
         <Route path="/login" element={<Login />}></Route>

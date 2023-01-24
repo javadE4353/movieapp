@@ -16,9 +16,6 @@ import "react-datepicker/dist/react-datepicker.css";
 import useAxiosPrivate from "../hook/useAxiosPrivate";
 
 import { Users, StateTypeAuth, Categories, Movies } from "../typeing";
-import getCategorys, {
-  getPublicCategory,
-} from "../redux/actionCreator/actionCreateCategory";
 import { useAppSelector, useAppDispatch } from "../app/hooks";
 import { fatchInsertMovies } from "../features/movies/movies";
 
@@ -139,10 +136,6 @@ const InsertMovie = () => {
       dispatch(fatchInsertMovies({axiosPrivate,data: formData, userid:user?.userInfo?.id}));
     }
   };
-
-  useEffect(() => {
-    dispatch(getPublicCategory());
-  }, []);
 
 //
   useEffect(() => {

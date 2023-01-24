@@ -26,8 +26,8 @@
         }
       },
       "production": {
-        "username": "root",
-        "password": "4353",
+        "username": "javad43",
+        "password": "43534353",
         "database": "movieapp_production",
         "host": "127.0.0.1",
         "dialect": "mysql",

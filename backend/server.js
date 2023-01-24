@@ -22,7 +22,6 @@ const app = express();
 
 // connectDB
 connectDB();
-app.use( express.static('public'))
 //middleware
 app.use(credentials);
 app.use(cors(corsOption));
@@ -30,7 +29,7 @@ configMiddleware(express, app);
 app.use(coockieparser());
 logError();
 // define route
-app.use("/api/v1/", router);
+app.use("/api", router);
 // listen server
 const PORT =
   process.env.NODE_ENV === "production" ? process.env.PORTSR || 80 : 3500;

@@ -150,9 +150,9 @@ interface InitialState {
   }
   
   const initialState:InitialState = {
-    movies:JSON.parse(sessionStorage.getItem("moviesTable") || '[]')?.length>0?JSON.parse(sessionStorage.getItem("moviesTable")|| "[]") :[],
-    Allmovie:JSON.parse(sessionStorage.getItem("movies") || '[]')?.length>0?JSON.parse(sessionStorage.getItem("movies")|| "[]") :[],
-    count:JSON.parse(sessionStorage.getItem("countMovie") || '0')>0?JSON.parse(sessionStorage.getItem("countMovie") || "0") :0,
+    movies:sessionStorage.getItem("moviesTable")?JSON.parse(sessionStorage.getItem("moviesTable")|| "[]") :[],
+    Allmovie:sessionStorage.getItem("movies")?JSON.parse(sessionStorage.getItem("movies")|| "[]") :[],
+    count:sessionStorage.getItem("countMovie")?JSON.parse(sessionStorage.getItem("countMovie") || "0") :0,
     insert: 0,
     update: 0,
     delete: 0,
@@ -185,7 +185,9 @@ const movieSlice = createSlice({
         (state, action: PayloadAction< Movies[]>) => {
           state.isLoading = false;
           state.Allmovie=action.payload
-          sessionStorage.setItem("movies",JSON.stringify(action.payload))
+          if(action.payload){
+            sessionStorage.setItem("movies",JSON.stringify(action.payload))
+          }
         }
       )
       .addCase(fatchmoviesPublic.rejected, (state, action) => {
@@ -204,11 +206,13 @@ const movieSlice = createSlice({
           action: PayloadAction<{ movies: Movies[]; count: number }>
         ) => {
           state.isLoading = false;
-          state.movies = action.payload.movies;
-          state.count = action.payload.count;
-          sessionStorage.setItem("moviesTable",JSON.stringify(action.payload.movies))
-          sessionStorage.setItem("countMovie",JSON.stringify(action.payload.count))
-
+          state.movies = action.payload?.movies;
+          state.count = action.payload?.count;
+          if(action.payload?.movies){
+            sessionStorage.setItem("moviesTable",JSON.stringify(action.payload.movies))
+            sessionStorage.setItem("countMovie",JSON.stringify(action.payload.count))
+  
+          }
         }
       )
       .addCase(fatchmovies.rejected, (state, action) => {

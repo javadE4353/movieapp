@@ -127,12 +127,12 @@ type Initialstate = {
 };
 
 const initialState: Initialstate = {
-  categorys:JSON.parse(sessionStorage.getItem("categorysTable") || '[]')?.length>0?JSON.parse(sessionStorage.getItem("categorysTable")|| "[]") :[],
-  categoryPublic:JSON.parse(sessionStorage.getItem("categorys") || '[]')?.length>0?JSON.parse(sessionStorage.getItem("categorys")|| "[]") :[],
+  categorys:sessionStorage.getItem("categorysTable")?JSON.parse(sessionStorage.getItem("categorysTable")|| "[]") :[],
+  categoryPublic:sessionStorage.getItem("categorys")?JSON.parse(sessionStorage.getItem("categorys")|| "[]") :[],
   update: 0,
   delete: 0,
   insert: 0,
-  count:JSON.parse(sessionStorage.getItem("countTable") || '0')>0?JSON.parse(sessionStorage.getItem("countTable") || "0") :0,
+  count:sessionStorage.getItem("countTable")?JSON.parse(sessionStorage.getItem("countTable") || "0") :0,
   isLoading: false,
   ErrorMassege: "",
 };
@@ -164,6 +164,7 @@ const categorySlice = createSlice({
         (state, action: PayloadAction<Categories[]>) => {
           state.isLoading = false;
           state.categoryPublic = action.payload;
+          if(action.payload)
           sessionStorage.setItem("categorys",JSON.stringify( action.payload))
         }
       )
@@ -185,9 +186,10 @@ const categorySlice = createSlice({
           state.isLoading = false;
           state.categorys = action.payload.categorys;
           state.count = action.payload.count;
-          sessionStorage.setItem("categorysTable",JSON.stringify( action.payload.categorys))
-          sessionStorage.setItem("countTable",JSON.stringify(  action.payload.count))
-
+          if(action.payload?.categorys){
+            sessionStorage.setItem("categorysTable",JSON.stringify( action.payload.categorys))
+            sessionStorage.setItem("countTable",JSON.stringify(  action.payload.count))
+          }
         }
       )
       .addCase(fatchCategorys.rejected, (state, action) => {

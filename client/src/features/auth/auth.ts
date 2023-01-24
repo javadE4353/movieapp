@@ -101,9 +101,9 @@ const loginSlice = createSlice({
       state,
       action: PayloadAction<{accessToken: string; userInfo: Userinfo}>
     ) => {
-      state.accessToken = action.payload.accessToken;
-      state.userInfo = action.payload.userInfo;
-      if(action.payload.userInfo)
+      state.accessToken = action.payload?.accessToken;
+      state.userInfo = action.payload?.userInfo;
+      if(action.payload?.userInfo)
       sessionStorage.setItem("accesstoken",JSON.stringify(action.payload))
     },
   },
@@ -212,9 +212,9 @@ const loginSlice = createSlice({
         ) => {
           state.isLoading = false;
           state.errorMessage = "";
-          state.accessToken = action.payload.accessToken;
-          state.userInfo = action.payload.userInfo;
-          if(action.payload.userInfo)
+          state.accessToken = action.payload?.accessToken;
+          state.userInfo = action.payload?.userInfo;
+          if(action.payload?.userInfo)
           sessionStorage.setItem("accesstoken",JSON.stringify(action.payload))
         }
       )
