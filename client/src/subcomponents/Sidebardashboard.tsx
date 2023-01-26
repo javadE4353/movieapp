@@ -29,8 +29,8 @@ const SidebarDashboard = () => {
   const [Sidebar, setSidebar] = useRecoilState(modalSidebarAdmin);
 
   useEffect(() => {
-    const user=sessionStorage.getItem("accesstoken");
-    const token= user && JSON.parse(user);
+    const User=sessionStorage.getItem("accesstoken");
+    const token= User && JSON.parse(`${User}`);
     if(token){
       token?.userInfo?.role === "admin"
       ? setMenus(menusAdmin)

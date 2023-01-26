@@ -127,12 +127,12 @@ type Initialstate = {
 };
 
 const initialState: Initialstate = {
-  categorys:sessionStorage.getItem("categorysTable")?JSON.parse(sessionStorage.getItem("categorysTable")|| "[]") :[],
-  categoryPublic:sessionStorage.getItem("categorys")?JSON.parse(sessionStorage.getItem("categorys")|| "[]") :[],
+  categorys:sessionStorage.getItem("categorysTable") && JSON.parse(`${sessionStorage.getItem("categorysTable")}`)?JSON.parse(`${sessionStorage.getItem("categorysTable")}`) :[],
+  categoryPublic:sessionStorage.getItem("categorys") && JSON.parse(`${sessionStorage.getItem("categorys")}`)?JSON.parse(`${sessionStorage.getItem("categorys")}`) :[],
   update: 0,
   delete: 0,
   insert: 0,
-  count:sessionStorage.getItem("countTable")?JSON.parse(sessionStorage.getItem("countTable") || "0") :0,
+  count:sessionStorage.getItem("countTable") && JSON.parse(`${sessionStorage.getItem("countTable")}`)?JSON.parse(`${sessionStorage.getItem("countTable")}`) :0,
   isLoading: false,
   ErrorMassege: "",
 };

@@ -150,9 +150,9 @@ interface InitialState {
   }
   
   const initialState:InitialState = {
-    movies:sessionStorage.getItem("moviesTable")?JSON.parse(sessionStorage.getItem("moviesTable")|| "[]") :[],
-    Allmovie:sessionStorage.getItem("movies")?JSON.parse(sessionStorage.getItem("movies")|| "[]") :[],
-    count:sessionStorage.getItem("countMovie")?JSON.parse(sessionStorage.getItem("countMovie") || "0") :0,
+    movies:sessionStorage.getItem("moviesTable") && JSON.parse(`${sessionStorage.getItem("moviesTable")}`)?JSON.parse(`${sessionStorage.getItem("moviesTable")}`) :[],
+    Allmovie:sessionStorage.getItem("movies") && JSON.parse(`${sessionStorage.getItem("movies")}`)?JSON.parse(`${sessionStorage.getItem("movies")}`) :[],
+    count:sessionStorage.getItem("countMovie") && JSON.parse(`${sessionStorage.getItem("countMovie")}`)?JSON.parse(`${sessionStorage.getItem("countMovie")}`) :0,
     insert: 0,
     update: 0,
     delete: 0,

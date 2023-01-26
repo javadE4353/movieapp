@@ -131,10 +131,10 @@ interface InitialState {
 }
 
 const initialState: InitialState = {
-  users: sessionStorage.getItem("users")? JSON.parse(sessionStorage.getItem("users") || `[]`): [],
+  users: sessionStorage.getItem("users") && JSON.parse(`${sessionStorage.getItem("users")}`)? JSON.parse(`${sessionStorage.getItem("users")}`): [],
   allusres: [],
   insert: 0,
-  count: sessionStorage.getItem("countUsers")? JSON.parse(sessionStorage.getItem("countUsers") || `0`): 0,
+  count: sessionStorage.getItem("countUsers") && JSON.parse(`${sessionStorage.getItem("countUsers")}`)? JSON.parse(`${sessionStorage.getItem("countUsers")}`): 0,
   update: 0,
   delete: 0,
   isLoading: false,

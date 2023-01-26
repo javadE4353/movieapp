@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import React,{ useEffect, useRef, useState } from "react";
 
 //module external
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
@@ -110,21 +110,21 @@ function Row({ title, movies, category }: Props) {
           {category === 1 ? (
             <>
               {movie?.map((movie, i) => (
-                <>
-                  <SwiperSlide key={i}>
+                <React.Fragment key={i}>
+                  <SwiperSlide>
                     <Thumbnail
                       key={movie.id}
                       movie={movie}
                       category={category}
                     />
                   </SwiperSlide>
-                </>
+                </React.Fragment>
               ))}
             </>
           ) : (
             <>
               {movie?.map((movie, i) => (
-                <>
+                <React.Fragment key={i}>
                   {movie?.genre_ids?.includes(category) && (
                     <SwiperSlide key={i}>
                       <Thumbnail
@@ -134,7 +134,7 @@ function Row({ title, movies, category }: Props) {
                       />
                     </SwiperSlide>
                   )}
-                </>
+                </React.Fragment>
               ))}
             </>
           )}

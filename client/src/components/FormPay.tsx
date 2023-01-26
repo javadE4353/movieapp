@@ -9,14 +9,12 @@ import { HiXMark, HiOutlineXMark } from "react-icons/hi2";
 import { useRecoilState } from "recoil";
 import {
   modalAccount,
-  modalCreateUser,
-  modalEditUser,
   payAccount,
 } from "../atoms/modalAtom";
 
 //
 
-import { Users, Userinfo, Payment, StateTypeAuth } from "../typeing";
+import { Users, Payment, StateTypeAuth } from "../typeing";
 import { useAppSelector, useAppDispatch } from "../app/hooks";
 
 //interface
@@ -29,16 +27,6 @@ const override: CSSProperties = {
   transform: "translate(-50%, -50%)",
   right: "44%",
 };
-
-interface State {
-  users: {
-    user: Users | null;
-    count: number;
-    insert: Users | null;
-    isloading: boolean;
-    ErrorMessage: string | null;
-  };
-}
 
 interface Inputs {
   email: string;

@@ -1,15 +1,15 @@
 import { useState } from "react";
 
 //module external
-import { useRecoilState } from "recoil";
 import { FaPlay } from "react-icons/fa";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import { toast } from 'react-toastify';
 import "react-lazy-load-image-component/src/effects/blur.css";
+
 //
 import { Movies, StateTypeAuth } from "../typeing";
-import { showAlert } from "../atoms/modalAtom";
 import { Link, useLocation } from "react-router-dom";
-import { useAppSelector, useAppDispatch } from "../app/hooks";
+import { useAppSelector } from "../app/hooks";
 
 //interface
 interface Props {
@@ -18,19 +18,23 @@ interface Props {
 
 //component
 const Card = ({ movie }: Props) => {
-  const [showalret, setShowAlert] = useRecoilState(showAlert);
   const user = useAppSelector((state: StateTypeAuth) => state?.auth);
   const [errorShowMovie, setErrorShowMovie] = useState<string>("");
   const loc = useLocation();
   const handleShowMovie = () => {
     if (user?.userInfo?.username) {
       setErrorShowMovie("");
-      setShowAlert(false);
     } else {
-      setErrorShowMovie(
-        "برای مشاهده فیلم باید اشتراک داشته باشید یا در سایت ثبت نام کنید"
-      );
-      setShowAlert(true);
+      toast("برای مشاهده فیلم در سایت ثبت نام کنید", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
     }
   };
 

@@ -1,4 +1,4 @@
-import { useEffect, useState, CSSProperties } from "react";
+import React,{ useEffect, useState, CSSProperties } from "react";
 
 //module external
 import { useAppSelector, useAppDispatch } from "../app/hooks";
@@ -135,7 +135,7 @@ const Home: React.FC = () => {
               <section className="md:space-y-24 mt-[20%] sm:mt-[25%] md:mt-[25%] lg:mt-[25%] xl:mt-[30%]">
                 {categorys?.length > 0
                   ? categorys?.map((item, i) => (
-                      <>
+                      <React.Fragment key={i}>
                         {item.bits !== 1 && (
                           <>
                             {item.bits !== 100 ? (
@@ -148,22 +148,23 @@ const Home: React.FC = () => {
                             ) : null}
                           </>
                         )}
-                      </>
+                      </React.Fragment>
                     ))
                   : null}
                 {user?.accessToken ? (
                   <>
                     {mylist?.mylist?.length > 0
                       ? categorys?.map((item, i) => (
-                          <>
+                          <React.Fragment key={i}>
                             {item?.bits === 1 && (
                               <Row
+                               key={i}
                                 title={item?.title}
                                 movies={mylist?.mylist}
                                 category={item?.bits}
                               />
                             )}
-                          </>
+                         </React.Fragment>
                         ))
                       : null}
                   </>

@@ -1,16 +1,10 @@
-import { useState, CSSProperties, useCallback, useEffect } from "react";
+import { useState, CSSProperties, useEffect } from "react";
 
 //module extra
 import { useForm, SubmitHandler } from "react-hook-form";
-import ClipLoader from "react-spinners/ClipLoader";
 import { motion } from "framer-motion";
-import MuiModal from "@mui/material/Modal";
-import { HiOutlineXMark } from "react-icons/hi2";
-import { useRecoilState } from "recoil";
 import { Link, useNavigate, Outlet } from "react-router-dom";
-import MoonLoader from "react-spinners/MoonLoader";
 import DatePicker from "react-datepicker";
-import addDays from "date-fns/addDays";
 import "react-datepicker/dist/react-datepicker.css";
 //
 import useAxiosPrivate from "../hook/useAxiosPrivate";
@@ -20,30 +14,7 @@ import { useAppSelector, useAppDispatch } from "../app/hooks";
 import { fatchInsertMovies } from "../features/movies/movies";
 
 // interface and stylecss
-const override: CSSProperties = {
-  display: "block",
-  margin: "0 auto",
-  borderColor: "red",
-  position: "absolute",
-  top: "50%",
-  transform: "translate(-50%, -50%)",
-  right: "44%",
-};
-const overrideupdate: CSSProperties = {
-  borderColor: "#36d7b7",
-  position: "absolute",
-  top: "50%",
-  right: "44%",
-};
-interface State {
-  users: {
-    user: Users | null;
-    count: number;
-    insert: number;
-    isloading: boolean;
-    ErrorMessage: string | null;
-  };
-}
+
 
 interface Inputs {
   adult: string;
@@ -95,7 +66,6 @@ interface IsertComplateMovie{
 }
 
 const InsertMovie = () => {
-  let [color, setColor] = useState("#ffffff");
   const categorys = useAppSelector(
     (state: Categorys) => state?.categorys?.categoryPublic
   );
@@ -169,19 +139,7 @@ const InsertMovie = () => {
               <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="grid gap-4 mb-4 sm:grid-cols-2">
                   <div className="flex justify-between items-center">
-                    {/* <div className="col-span-full">
-                      <label
-                        className="block mb-2 text-sm font-medium text-black dark:text-black"
-                        form="file_input"
-                      >
-                        عکس بزرگ
-                      </label>
-                      <input
-                        className="block p-2 w-full text-sm text-gray-900 border border-gray-300 rounded-sm cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                        type="file"
-                        {...register("backdrop_path")}
-                      />
-                    </div> */}
+                    
                     <div className="col-span-full">
                       <label
                         className="block mb-2 text-sm font-medium text-black dark:text-black"

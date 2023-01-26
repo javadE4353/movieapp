@@ -1,30 +1,25 @@
 //module external
-import { useRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import {LazyLoadImage} from "react-lazy-load-image-component"
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import { FaPlay } from "react-icons/fa";
 
 //
-import { showAlert } from "../atoms/modalAtom";
-import { Movies, StateTypeAuth, Userinfo } from "../typeing";
-import { useAppSelector, useAppDispatch } from "../app/hooks";
+import { Movies, StateTypeAuth} from "../typeing";
+import { useAppSelector } from "../app/hooks";
 
 //interface
 interface Props {
   movie: Movies | null;
   category:number
 }
-const generateArray=(items:number)=>[...Array.from(Array(items))]
 //component
 function Thumbnail({ movie,category }: Props) {
-  const [showalret, setShowAlert] = useRecoilState(showAlert);
   const user = useAppSelector((state: StateTypeAuth) => state?.auth);
   const navigate = useNavigate();
   const handleShowMovie = () => {
     if (user?.userInfo?.username && movie) {
-      setShowAlert(false);
       navigate(`movie/${category===1?movie.movieid:movie.id}`);
     } else {
       toast("برای مشاهده فیلم در سایت ثبت نام کنید", {
@@ -37,7 +32,6 @@ function Thumbnail({ movie,category }: Props) {
         progress: undefined,
         theme: "dark",
         });
-      setShowAlert(true);
     }
   };
   return (

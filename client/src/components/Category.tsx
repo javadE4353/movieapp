@@ -1,16 +1,12 @@
 //module external
-import { useRecoilState } from "recoil";
 import { Outlet } from "react-router-dom";
-import { BsX } from "react-icons/bs";
 
 //
-import { showAlert } from "../atoms/modalAtom";
 import Card from "../subcomponents/Card";
-import { useAppSelector, useAppDispatch } from "../app/hooks";
+import { useAppSelector } from "../app/hooks";
 
 //type
 import { Movies, StateTypeAuth } from "../typeing";
-import axios from "axios";
 
 //interface
 interface Props {
@@ -19,30 +15,11 @@ interface Props {
 }
 
 function Category({ movie, gener }: Props) {
-  const [showalret, setShowAlert] = useRecoilState(showAlert);
-
   //accessToken
   const accesstoken = useAppSelector((state: StateTypeAuth) => state?.auth);
   
   return (
     <>
-      <div
-        className={`fixed top-0 z-[999] bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative ${
-          showalret ? "block" : "hidden"
-        }`}
-      >
-        <strong className="font-bold">اشتراک!</strong>
-        <span className="block sm:inline">
-          برای تماشای فیلم ها باید اشتراک داشته باشید یا در سایت ثبت نام کنید
-        </span>
-        <span
-          className="absolute top-0 bottom-0 left-0 px-4 py-3"
-          onClick={() => setShowAlert(false)}
-        >
-          <BsX size={20} />
-        </span>
-      </div>
-
       <div className="flex flex-wrap justify-center	items-center">
         <>
           {movie ? (

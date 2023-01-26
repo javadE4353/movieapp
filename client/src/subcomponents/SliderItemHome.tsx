@@ -1,18 +1,12 @@
 import React, { useState } from "react";
 
 //module external
-import { useRecoilState } from "recoil";
-import { FaPlay } from "react-icons/fa";
-import { HiOutlineInformationCircle } from "react-icons/hi";
-import { BsX } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from 'react-toastify';
-import {LazyLoadImage} from "react-lazy-load-image-component"
+import { toast } from 'react-toastify';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 //
-import { showAlert } from "../atoms/modalAtom";
 import { Movies, StateTypeAuth } from "../typeing";
-import { useAppSelector, useAppDispatch } from "../app/hooks";
+import { useAppSelector } from "../app/hooks";
 
 //interface
 interface Props {
@@ -21,9 +15,9 @@ interface Props {
 
 const SliderItemHome = ({ item }: Props) => {
   const user = useAppSelector((state: StateTypeAuth) => state?.auth);
+  //
   const navigate = useNavigate();
-
-  const [showalret, setShowAlert] = useRecoilState(showAlert);
+ // 
   const handleShowMovie = (id: number | null) => {
     if (user?.userInfo?.username && id) {
       navigate(`/movie/${id}`);
